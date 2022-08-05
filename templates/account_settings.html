@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block aside %}
+<main>
+    <h2>Account Settings</h2>
+    <aside>
+        <nav>
+            <h3>Change Account Info</h3>
+            <ul class="col">
+                <li><a href="{{ url_for('settings_user')}}">User Id</a></li>
+                <li><a href="{{ url_for('settings_pass')}}">Password</a></li>
+                <li><a href="{{ url_for('settings_name')}}">Name</a></li>
+            </ul>
+        </nav>
+    </aside>
+    {% endblock %}
+
+    {% block main_content %}
+    <h2>Account Info</h2>
+    <ul>
+        <li>Name: {{ person['name'] }} </li>
+        <li>User Id: {{ person['user_id'] }}</li>
+    </ul>
+</main>    
+    {% endblock %}

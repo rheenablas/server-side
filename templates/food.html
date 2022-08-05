@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{#{% block fav %}
+<link rel="icon" href="{{ url_for('static', filename='cart.ico') }}"/>
+{% endblock %}#}
+
+{% block aside %}
+<div class="pic">
+    <aside>
+        {% if food["food_id"] == 1 %}
+            <img src="{{ url_for('static', filename='silv.JPG')}}" alt='Silvanas' />
+        {% elif food["food_id"] == 2 %}
+            <img src="{{ url_for('static', filename='sansrival.JPG')}}" alt='Sansrival' />
+        {% elif food["food_id"] == 13 %}
+            <img src="{{ url_for('static', filename='ubecake.JPG')}}" alt='Ube Cake' />
+        {% elif food["food_id"] == 3%}
+            <img src="{{ url_for('static', filename='strawberry_cake.JPG')}}" alt='Strawberry Cake' />
+        {% elif food["food_id"] == 4 %}
+            <img src="{{ url_for('static', filename='longganisa.JPG')}}" alt='Filipino Sausage' />
+        {% elif food["food_id"] == 5 %}
+            <img src="{{ url_for('static', filename='oreo_cheesecake.JPG')}}" alt='Oreo Cheesecake' />
+        {% elif food["food_id"] == 6 %}
+            <img src="{{ url_for('static', filename='seafood_pasta.JPG')}}" alt='Seafood seafood_pasta' />
+        {% elif food["food_id"] == 7 %}
+            <img src="{{ url_for('static', filename='pad_thai.JPG')}}" alt='Pad Thai' />
+        {% elif food["food_id"] == 8 %}
+            <img src="{{ url_for('static', filename='chicken_wings.JPG')}}" alt='Chicken Wings' />
+        {% elif food["food_id"] == 22 %}
+            <img src="{{ url_for('static', filename='tempura_platter.JPG')}}" alt='Tempura Platter' />
+        {% elif food["food_id"] == 18 %}
+            <img src="{{ url_for('static', filename='food_for_the_gods.JPG')}}" alt='Food for the gods' />
+        {% elif food["food_id"] == 19 %}
+            <img src="{{ url_for('static', filename='crinkles.JPG')}}" alt='Chocolate Crinkles Cookies' />
+        {% elif food["food_id"] == 14 %}
+            <img src="{{ url_for('static', filename='ice_cream.jpg')}}" alt='Chocolate Crinkles Cookies' />
+        {% elif food["food_id"] == 17 %}
+            <img src="{{ url_for('static', filename='muffin.jpg')}}" alt='Muffins' />
+        
+        {% endif %}
+    </aside>
+    {% endblock %}
+
+    {% block main_content %}
+    <section>
+        <h2>{{ food["name"] }}</h2>
+        <p>
+            Price: {{ food["price"] }}
+        </p>
+        {% if food['description'] != '' %}
+        <p>
+            Description: {{ food["description"] }}
+        </p>
+        {% endif %}
+        <p>
+            Contains: {{ food["allergens"] }}
+        </p>
+        {% if vari %}
+            <p>
+                Varieties: {% for variaties in vari %}
+                    {{ variaties['var'] }}{% if not loop.last %},  
+                        {% endif %}
+                    {% endfor %}
+            </p>
+            <p class="indent">Add varieties to "info" in checkout!</p>
+        {% endif %}
+        <p>{% if g.user == 'rb' or g.user == 'admin' %}
+            {% else %}
+            <a href="{{ url_for('add_to_cart', food_id=food['food_id'])}}">
+                
+                <img src="{{ url_for('static', filename='cart.png')}}"  width="20px" /> Add to cart
+                <img src="{{ url_for('static', filename='cart.png')}}"  width="20px" />
+            </a>{% endif %}
+        </p>
+    </section>
+</div>
+    {% endblock %}

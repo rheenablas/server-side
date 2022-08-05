@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+
+{% block aside %}
+{% endblock %}
+
+{% block main_content %}
+<main id="message">
+    <p>
+        {{ message }}
+    </p>
+    <p>
+    {% if link == 'amenu' %}
+        View <a href="{{ url_for('amenu') }}">{{ link_name }}</a>!
+    {% elif link == 'review' %}
+        View <a href="{{ url_for('review') }}">{{ link_name }}</a>!
+    {% elif link == 'ordered' %}
+        View <a href="{{ url_for('ordered') }}">{{ link_name }}</a>!
+    {% elif link == 'orders' %}
+        View <a href="{{ url_for('orders') }}">{{ link_name }}</a>!
+    {% elif link == 'requests' %}
+        View <a href="{{ url_for('request_food') }}">{{ link_name }}</a>!
+    {% elif link == 'account' %}
+        View <a href="{{ url_for('account_settings') }}">{{ link_name }}</a>!
+    {% elif link == 'menu' %}
+        View <a href="{{ url_for('menu') }}">{{ link_name }}</a>!
+    {% endif %}
+    </p>
+</main>
+
+{% endblock %}

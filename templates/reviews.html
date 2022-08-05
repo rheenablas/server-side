@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+
+{% block main_content %}
+<main>
+    <h2>Reviews</h2>
+    {% if reviews %}
+        <table>
+            <tr>
+                <th scope='col'>Name</th>
+                <th scope='col'>Food</th>
+                <th scope='col'>Review</th>
+                {% if g.user == 'rb' or g.user == 'admin' %}
+                    <th></th>
+                {% endif %}
+            </tr>
+            {% for review in reviews %}
+            <tr>
+                <td>{{ review["name"] }}</td>
+                <td>{{ review["n_food"] }}</td>
+                <td>{{ review["review"] }}  </td>
+                {% if g.user == 'rb' or g.user == 'admin' %}
+                    <td><a href="{{ url_for('remove_review', Id=review['id']) }}">Remove</a></td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </table>     
+        
+    {% else %}
+            <p> {{ message }} </p>
+            
+    {% endif %}
+    {% if g.user: %}
+        {% if g.user == 'rb' or g.user == 'admin': %}
+
+        {% else: %}
+            {% if rev %}
+            <p><a href="{{ url_for('edit_review') }}">Edit reviews</a></p>            
+            {% endif %}
+            {% if order %}
+            <p>Leave a review <a href="{{ url_for('leave_review') }}">here!</a></p>
+            {% else %}
+            <p>Leave a review <a href="{{ url_for('message', message='Order first before leaving a review!') }}">here!</a></p>
+            {% endif %}
+        {% endif %}
+    {% else %}
+        
+    {% endif %}
+</main>
+{% endblock %}

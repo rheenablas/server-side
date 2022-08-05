@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block aside %}
+<main class="col">
+    <aside>
+        <form action="" method="POST" novalidate>
+
+            {{ form.hidden_tag() }}
+            {{ form.Id.label }}
+            {{ form.Id() }}
+            <br />
+            {{ form.status.label }}
+            {{ form.status() }}
+            <br />
+            {{ form.submit() }}
+        </form>
+
+        <form action="" method="POST" novalidate>
+
+            {{ forms.hidden_tag() }}
+            {{ forms.Id.label }}
+            {{ forms.Id() }}
+            <br />
+            {{ forms.submit() }}
+        </form>
+
+        {% endblock %}
+    </aside>
+
+    {% block main_content %}
+    <section>
+        <h2>Customer Data</h2>
+        <nav>
+            <ul>
+                <li>Sort by:</li>
+                <li><a href="{{ url_for('osort', sort='astatus') }}">Status</a></li>
+                <li><a href="{{ url_for('osort', sort='adate_order') }}">Date of Order</a></li>
+                <li><a href="{{ url_for('osort', sort='adate_del') }}">Date of Delivery</a></li>
+                <li><a href="{{ url_for('osort', sort='atotal') }}">Total</a></li>
+            </ul>
+        </nav>
+
+        <ul>{% for info in lis %}
+            <li>
+                <ul>
+                    <li>Order No: {{ info['id'] }}</li>
+                    <li>User Id: {{ info['user_id'] }}, {{ info['name']}} </li>
+                    <li>Date of Order: {{ info['date_of_order'] }}</li>
+                    <li>Date of Delivery: {{ info['date_del'] }}</li>
+                    <li>Time of Delivery: {{ info['time_del'] }}</li>
+                    <li>Address: {{ info['address'] }}</li>
+                    <li>Order Status: <b>{{ info['status'] }}</b></li>
+                    <li>Total: {{ info['total'] }}</li>
+                    <li>Orders:
+                        <ol>
+                            {% for order in info['order'] %}
+                            <li>{{ order }}</li>
+                            {% endfor %}
+                        </ol>
+                    </li>
+                </ul>
+            </li>{% endfor %}
+        </ul>
+    </section>
+</main>
+{% endblock %}

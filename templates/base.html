@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Victoria's Catering</title>
+    <link rel='stylesheet' href="{{ url_for('static', filename='styles.css') }}"/>
+    <link rel="icon" href="{{ url_for('static', filename='main.ico') }}"/>
+</head>
+
+<body>
+    <header>
+        <h1>Victoria's Catering</h1>
+        <nav>
+            {% if g.user %}
+            <section>
+                <p>Welcome {{ g.name }}! </p>
+                <p><a href="{{ url_for('account_settings') }}">Account Settings</a>
+                    <a href="{{ url_for('logout') }}">Logout</a></p>
+            </section>
+                {% if g.user == 'rb' or g.user == 'admin' %}
+                <nav>
+                    <ul>
+                        <li><a href="{{ url_for('amenu') }}">All Menu</a>
+                                <ul>
+                                    <li><a href="{{ url_for('menu') }}">Main Menu</a>
+                                    <li><a href="{{ url_for('xret_menu')}}">Secret Menu</a></li>
+                                    <li><a href="{{ url_for('add_menu') }}">Add to Menu</a></li>
+                                    <li><a href="{{ url_for('edit_menu') }}">Edit Menu</a></li>                        
+                                </ul>
+                        </li>
+                        <li><a href="{{ url_for('orders') }}">Orders</a></li>
+                        <li><a href="{{ url_for('review') }}">Reviews</a></li>
+                        <li><a href="{{ url_for('request_food') }}">Request</a></li>
+                    </ul>
+                </nav>
+                
+                {% else %}
+                <nav>
+                    <ul>
+                        <li><a href="{{ url_for('menu') }}">Menu</a></li>
+                        {% if session['order'] >= 3 %}
+                            <li><a href="{{ url_for('xret_menu')}}">Secret Menu</a></li>
+                        {% endif %}
+                        <li><a href="{{ url_for('cart') }}">Cart</a></li>
+                        <li><a href="{{ url_for('request_food') }}">Request</a></li>
+                        <li><a href="{{ url_for('review') }}">Reviews</a></li>
+                        <li><a href="{{ url_for('ordered') }}">Orders</a>
+                    </ul>
+                </nav>
+                
+                {% endif %}
+            {% else %}
+                <nav>
+                    <ul>
+                        <li><a href="{{ url_for('menu') }}">Menu</a></li>
+                        <li><a href="{{ url_for('review') }}">Reviews</a></li>
+                        <li><a href="{{ url_for('register') }}">Register</a></li>
+                        <li><a href="{{ url_for('login') }}">Login</a></li>
+                        {% if session['cart'] %}
+                        <li><a href="{{ url_for('cart') }}">Cart</a></li>
+                        {% endif %}
+                    </ul>
+            {% endif %}
+        </nav>
+    </header>
+
+        {% block aside %}
+    
+        {% endblock %}
+
+        {% block main_content %}
+    
+        {% endblock %}
+    
+
+    <footer>
+        <p>
+            A Web Development 2 project. 
+        </p>
+        <p>
+            &#169 Rheena Blas <strong class="col">To God be the glory!</strong>
+        </p>
+    </footer>
+</body>
+
+</html>

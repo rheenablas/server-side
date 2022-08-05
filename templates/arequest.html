@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block aside %}
+<main>
+    <h2>Food Requests</h2>
+    <aside>
+        <h3>Change to status to 'READ'</h3>
+        <form action="" method="POST">
+            {{ form.hidden_tag() }}
+
+            {{ form.Id.label }}
+            {{ form.Id() }}
+            </br>
+            {{ form.submit() }}
+
+        </form>
+    </aside>
+    {% endblock %}
+
+
+    {% block main_content %}
+    <section>
+        <table class="cen">
+            <tr>
+                <th scope="col"><a href="{{ url_for('rsort', sort='id') }}">ID</a></th>
+                <th scope="col"><a href="{{ url_for('rsort', sort='user') }}">User Id</a></th>
+                <th scope="col"><a href="{{ url_for('rsort', sort='food') }}">Food</a></th>
+                <th scope="col"><a href="{{ url_for('rsort', sort='status') }}">Status</a></th>
+                <th scope="col"><a href="{{ url_for('rsort', sort='date')}}">Date</a></th>
+            </tr>
+            {% for request in requests %}
+            <tr>
+                <td>{{ request['id'] }}</td>
+                <td>{{ request['user_id'] }}</td>
+                <td>{{ request['food'] }}</td>
+                <td>{{ request['status'] }}</td>
+                <td>{{ request['date'] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </section>
+</main>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block aside %}
+{% endblock %}
+
+{% block main_content %}
+    
+<form action="" method="POST" novalidate class="marbot">
+        
+    {{ form.hidden_tag() }}
+    {{ form.fname.label }}
+    {{ form.fname() }}
+    {% for error in form.fname.errors %}
+        {{ error }}
+    {% endfor %}
+    <br />
+    {{ form.lname.label }}
+    {{ form.lname() }}
+    {% for error in form.lname.errors %}
+        {{ error }}
+    {% endfor %}
+    <br />
+    {{ form.user_id.label }}
+    {{ form.user_id() }}
+    {% for error in form.user_id.errors %}
+        {{ error }}
+    {% endfor %}
+    <br />
+    {{ form.password.label }}
+    {{ form.password() }}
+    {% for error in form.password.errors %}
+        {{ error }}
+    {% endfor %}
+    <br />
+    {{ form.password2.label }}
+    {{ form.password2() }}
+    {% for error in form.password2.errors %}
+        {{ error }}
+    {% endfor %}
+    <br />
+    {{ form.submit() }}
+    <br/>
+    <p>
+        Already have an account? Login <a href="{{ url_for('login') }}">here</a>!
+    </p>
+    </form>
+
+    
+{% endblock %}

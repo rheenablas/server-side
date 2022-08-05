@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+
+{% block aside %}
+
+{% endblock %}
+    
+{% block main_content %}
+<main>
+    <h2>Menu</h2>
+    <section>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('asort', sort='alphabetical') }}">Alphabetical</a></li>
+                <li><a href="{{ url_for('asort', sort='low') }}">Prices: low to high</a></li>
+                <li><a href="{{ url_for('asort', sort='high') }}">Prices: high to low</a></li>
+                <li><a href="{{ url_for('asort', sort='desc') }}">Description</a></li>
+            </ul>
+        </nav>
+    </section>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Description</th>
+        </tr>
+        {% for food in menu %}
+            <tr>
+                <td><a href="{{ url_for('food', food_id=food['food_id']) }}">{{ food["name"] }}</a></td>
+                <td>{{ food["price"] }}</td>
+                <td>{{ food["description"] }}</td>
+            </tr>
+        {% endfor %}
+    </table> 
+</main> 
+{% endblock %}

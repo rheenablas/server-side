@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block aside %}
+<main>
+    <aside>
+        <form>
+            <table>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Price</th>
+                </tr>
+                {% for food_id in cart %}
+                <tr>
+                    <td>{{ names[food_id] }}</td>
+                    <td>{{ cart[food_id] }}</td>
+                    <td>{{ prices[food_id] }}</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <th scope="row"> Total: </th>
+                    <td rowspan="2"> &#8364;{{ total }}</td>
+                </tr>
+            </table>
+            <p><a href="{{ url_for('cart') }}">Edit Order</a></p>
+        </form>
+    </aside>
+    {% endblock%}
+
+
+    {% block main_content %}
+    <section>
+        <h2>Your cart</h2>
+        <p>
+            <b>Note:</b> All orders must be made <b>at least a week in advance</b>.
+            Time of delivery must be from <b>8:00 am to 21:00</b> (9:00 pm).
+        </p>
+        <form action="" method="POST" novalidate class="marbot" id="big">
+            <p>
+                Enter your details.
+            </p>
+            {{ form.hidden_tag() }}
+            {{ form.first_line.label }}
+            {{ form.first_line() }}
+            {% for error in form.first_line.errors %}
+                {{ error }}
+            {% endfor %}
+            <br />
+            {{ form.sec_line.label }}
+            {{ form.sec_line() }}
+            <br />
+            {{ form.town.label }}
+            {{ form.town() }}
+            <br />
+            {{ form.county.label }}
+            {{ form.county() }}
+            {% for error in form.county.errors %}
+            {{ error }}
+            {% endfor %}
+            <br />
+            {{ form.eircode.label }}
+            {{ form.eircode() }}
+            {% for error in form.eircode.errors %}
+            {{ error }}
+            {% endfor %}
+            <br />
+            {{ form.date.label }}
+            {{ form.date() }}
+            {% for error in form.date.errors %}
+            {{ error }}
+            {% endfor %}
+            <br />
+            {{ form.time.label }}
+            {{ form.time() }}
+            {% for error in form.time.errors %}
+                {{ error }}
+            {% endfor %}
+            <br />
+            {{ form.info.label }}
+            {{ form.info() }}
+            <br />
+            {{ form.submit() }}
+        </form>
+    </section>
+</main>
+
+{% endblock %}

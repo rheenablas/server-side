@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block aside %}
+    {# @app.route("/type/<type>")
+        def type(type):
+            db = get_db()
+            #types = db.execute('''SELECT * FROM menu as m JOIN type as t
+             #                    ON m.name = t.name''').fetchall()
+            for typ in type:
+            if sort == 'alphabetical':
+            #        menu = db.execute('''SELECT * FROM menu WHERE description != '' ORDER BY name ;''').fetchall()
+            return render_template('menu.html', menu=menu)#}
+
+    {#<form action="" method="POST">
+        {{ form.hidden_tag() }}
+        {{ form.sort.label }}
+        {{ form.sort() }}
+        {{ form.submit() }}
+    </form>#}
+{% endblock%}
+{% block main_content %}
+<main>
+    <h2>Menu</h2>
+    
+    <section>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('sort', sort='alphabetical') }}">Alphabetical</a></li>
+                <li><a href="{{ url_for('sort', sort='low') }}">Prices: low to high</a></li>
+                <li><a href="{{ url_for('sort', sort='high') }}">Prices: high to low</a></li>
+            </ul>
+        </nav>
+    </section>
+    
+    <table>
+        <tr>
+            <th></th>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Description</th>            
+        </tr>
+        {% for food in menu %}
+            <tr>
+                {% if g.user == 'rb' or g.user == 'admin' %}
+                <td></td>
+                {% else %}
+                <td><a href="{{ url_for('add_to_cart', food_id=food['food_id']) }}"><img src="{{ url_for('static', filename='plus.png') }}" width="13"/></a></td>
+                {% endif %}
+                <td><a href="{{ url_for('food', food_id=food['food_id']) }}">{{ food["name"] }}</a></td>
+                <td>&#128;{{ food["price"] }}</td>
+                <td>{{ food["description"] }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</main>  
+{% endblock %}

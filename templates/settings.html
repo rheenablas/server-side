@@ -1,0 +1,108 @@
+{% extends 'account_settings.html' %}
+
+{% block form %}
+{#<aside>
+    <nav>
+        <h3>Change Account Info</h3>
+        <ul class="col">
+            <li>User Id
+                <ul>
+                    <li>
+                        <form action="" method="POST" novalidate>
+                            {{ form_user.hidden_tag() }}
+                            {{ form_user.user_id.label }}
+                            {{ form_user.user_id() }}
+                            {% for error in form_user.user_id.errors %}
+                            {{ error }}
+                            {% endfor %}
+                            <br />
+                            {{ form_user.password.label }}
+                            {{ form_user.password() }}
+                            {% for error in form_user.password.errors %}
+                                {{ error }}
+                            {% endfor %}
+                            <br />
+                            {{ form_user.submit() }}
+                        </form>
+                    </li>
+                </ul>
+            </li>
+            <li>Password
+                <ul>
+                    <li>
+                        
+                    </li>
+                </ul>
+            </li>
+            <li>Name
+                <ul>
+                    <li>
+                        
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</aside>
+#}
+
+    {% if edit == 'id' %}
+    <form action="" method="POST" novalidate>
+        {{ form_user.hidden_tag() }}
+        {{ form_user.user_id.label }}
+        {{ form_user.user_id() }}
+        {% for error in form_user.user_id.errors %}
+        {{ error }}
+        {% endfor %}
+        <br />
+        {{ form_user.password.label }}
+        {{ form_user.password() }}
+        {% for error in form_user.password.errors %}
+            {{ error }}
+        {% endfor %}
+        <br />
+        {{ form_user.submit() }}
+    </form>
+    {% elif edit == 'pass'%}
+    <form action="" method="POST" novalidate>
+        {{ form_pass.hidden_tag() }}
+        {{ form_pass.old_password.label }}
+        {{ form_pass.old_password() }}
+        {% for error in form_pass.old_password.errors %}
+        {{ error }}
+        {% endfor %}
+        <br />
+        {{ form_pass.npassword.label }}
+        {{ form_pass.npassword() }}
+        {% for error in form_pass.npassword.errors %}
+            {{ error }}
+        {% endfor %}
+        <br />
+        {{ form_pass.password2.label }}
+        {{ form_pass.password2() }}
+        {% for error in form_pass.password2.errors %}
+            {{ error }}
+        {% endfor %}
+        <br />
+        {{ form_pass.submit() }}
+        
+    </form>
+    {% else %}
+    <form action="" method="POST" novalidate>
+        {{ form_name.hidden_tag() }}
+        {{ form_name.fname.label }}
+        {{ form_name.fname() }}
+        <br />
+        {{ form_name.lname.label }}
+        {{ form_name.lname() }}
+        <br />
+        {{ form_name.password.label }}
+        {{ form_name.password() }}
+        {% for error in form_name.password.errors %}
+            {{ error }}
+        {% endfor %}
+        <br />
+        {{ form_name.submit() }}
+    </form>
+    {% endif %}
+{% endblock %}

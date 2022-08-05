@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block aside %}
+<main class="col">
+    <aside>
+        <h2>Add to Menu</h2>
+        <form action="" method="POST" novalidate>
+            {{ form.hidden_tag() }}
+            {{ form.name.label }}
+            {{ form.name() }}
+            {% for error in form.name.errors %}
+                {{ error }}
+            {% endfor%}
+            <br />
+            {{ form.price.label }}
+            {{ form.price() }}
+            {% for error in form.price.errors %}
+                {{ error }}
+            {% endfor %}
+            <br />
+            {{ form.allergens.label }}
+            {{ form.allergens() }}
+            <br />
+            {{ form.var.label }}
+            {{ form.var() }}
+            <br />
+            {{ form.description.label }}
+            {{ form.description() }}
+            <br />
+            {{ form.submit() }}
+        </form>  
+</main>
+{% endblock %}

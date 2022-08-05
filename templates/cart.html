@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+
+{% block main_content %}
+    <main>
+        <h2>Your cart</h2>
+        {% if cart%}
+            <table>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Qty</th>
+                    <th scope="col">Price</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                {% for food_id in cart %}
+                    <tr>
+                        <td>{{ names[food_id] }}</td>
+                        <td>{{ cart[food_id] }}</td>
+                        <td>{{ prices[food_id] }}</td>
+                        <td><a href="{{ url_for('remove_to_cart', food_id=food_id) }}"><img src="{{ url_for('static', filename='trash.png') }}"/></a></td>
+                        <td><a href="{{ url_for('add_to_cart', food_id=food_id) }}"><img src="{{ url_for('static', filename='plus.png') }}"/></a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+            <p >
+                Total: &#8364;{{ total }}
+            </p>
+                <form action="{{ url_for('confirm') }}">
+                    <button type='button' onclick="window.location.href='{{ url_for('menu') }}';">Add more</button>
+                <input name='form' type='submit' value="Proceed to payment" />
+                </form>
+        {% else %}
+            <p> Your cart is empty!</p>
+            <p><a href="{{ url_for('menu') }}">Add items to cart</a></p>
+        {% endif %}
+    </main>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+
+{% block aside %}
+{% endblock %}
+
+
+{% block main_content %}
+<main class="col">
+    <section>
+        {% if lis == [] %}
+        <p class="message"> Try one of our items! Thank you.</p>
+        {% else %}
+        <h2>Orders </h2>
+        <nav>
+            <ul>
+                <li>Sort by:</li>
+                <li><a href="{{ url_for('osort', sort='cstatus') }}">Status</a></li>
+                <li><a href="{{ url_for('osort', sort='cdate_order') }}">Date of Order</a></li>
+                <li><a href="{{ url_for('osort', sort='cdate_del') }}">Date of Delivery</a></li>
+                <li><a href="{{ url_for('osort', sort='ctotal') }}">Total</a></li>
+            </ul>
+        </nav>
+        <p>
+            Order status meaning:
+                <ul>
+                    <li><b>Pending:</b>  Owner is yet to see your order.</li>
+                    <li><b>Processing:</b>Order being cooked/prepared.</li>
+                    <li><b>Received:</b>Order is acknowledge by the owner.</li>
+                    <li><b>On the way:</b>Food is on the way!</li>
+                    <li><b>Done:</b>Customer has received order!</li>
+                </ul>
+                
+        </p>
+        <ul>{% for info in lis %}
+            <li>
+                <ul>
+                    <li>Order Number: {{ info['id'] }}</li>
+                    <li>Date of Order: {{ info['date_of_order'] }}</li>
+                    <li>Date of Delivery: {{ info['date_del'] }}</li>
+                    <li>Time of Delivery: {{ info['time_del'] }}</li>
+                    <li>Order Status: <b>{{ info['status'] }}</b></li>
+                    <li>Orders:
+                        <ol>
+                            {% for order in info['order'] %}
+                            <li>{{ order }}</li>
+                            {% endfor %}
+                        </ol>
+                    </li>
+                </ul>
+            </li>{% endfor %}
+        </ul>
+        {% endif %}
+    </section>
+</main>
+{% endblock %}

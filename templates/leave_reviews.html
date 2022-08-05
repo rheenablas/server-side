@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block aside %}
+{% endblock %}
+
+{% block main_content %}
+    
+    <form action="" method="POST" novalidate class="marbot">
+        
+    {{ form.hidden_tag() }}
+    {{ form.food.label}}
+    {{ form.food }}
+    <br />
+    {{ form.review.label }}
+    <br />
+    {{ form.review }}
+    <br />
+    {{ form.submit }}
+    </form>
+    {{ message }}
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block aside %}
+{% endblock %}
+
+{% block main_content %}
+    
+    <form action="" method="POST" novalidate class="marbot" id="big">
+            
+        {{ form.hidden_tag() }}
+        {{ form.user_id.label }}
+        {{ form.user_id() }}
+        {% for error in form.user_id.errors %}
+            {{ error }}
+        {% endfor %}
+        <br />
+        {{ form.password.label }}
+        {{ form.password() }}
+        {% for error in form.password.errors %}
+            {{ error }}
+        {% endfor %}
+        <br />
+        {{ form.submit() }}
+
+        <p>
+            Don't have an account? Register <a href="{{ url_for('register') }}">here!</a>
+        </p>
+    </form>
+
+    
+{% endblock %}

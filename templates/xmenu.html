@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+    {% block aside %}
+
+    {% endblock %}
+
+    {% block main_content %}
+<main>
+    <h2>Secret Menu</h2>
+    <section>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('xsort', sort='alphabetical') }}">Alphabetical</a></li>
+                <li><a href="{{ url_for('xsort', sort='low') }}">Prices: low to high</a></li>
+                <li><a href="{{ url_for('xsort', sort='high') }}">Prices: high to low</a></li>
+            </ul>
+        </nav>
+    </section>
+    <table>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+        </tr>
+        {% for food in menu %}
+        <tr>{% if g.user == 'rb' or g.user == 'admin' %}
+            <td></td>
+            {% else %}
+            <td><a href="{{ url_for('add_to_cart', food_id=food['food_id']) }}"><img
+                        src="{{ url_for('static', filename='plus.png') }}" width="13" /></a></td>
+            {% endif %}
+            <td><a href="{{ url_for('food', food_id=food['food_id']) }}">{{ food["name"] }}</a></td>
+            <td>{{ food["price"] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</main>
+    {% endblock %}

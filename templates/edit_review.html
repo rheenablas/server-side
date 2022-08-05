@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+<main>
+    {% block aside %}
+    <form action='' method='POST'>
+        {{ form.hidden_tag() }}
+        {{ form.Id.label }}
+        {{ form.Id }}
+        {% for error in form.Id.errors %}
+        {{ error }}
+        {% endfor %}
+        <br />
+        {{ form.review.label }}
+        {{ form.review()}}
+        {% for error in form.review.errors %}
+        {{ error }}
+        {% endfor %}
+        <br />
+        {{ form.submit() }}
+    </form>
+
+
+    {% endblock %}
+
+    {% block main_content %}
+    <h2>Edit Reviews</h2>
+
+    {% if reviews %}
+    <table>
+        <tr>
+            <th scope="col">Review id </th>
+            <th scope="col">Food</th>
+            <th scope="col">Review</th>
+            <th scope="col"></th>
+        </tr>
+        {% for review in reviews %}
+        <tr>
+            <td>{{ review["id"] }}</td>
+            <td>{{ review["n_food"] }}</td>
+            <td>{{ review["review"] }} </td>
+            <td><a href="{{ url_for('remove_review', Id=review['id']) }}">Remove</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+    {% endblock %}
+</main>

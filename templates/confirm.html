@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block aside %}
+    <form action="" method="POST" novalidate class="marbot">
+        {{ form.hidden_tag()}}
+        <h2>NOTE:</h2>
+        <p> {{ form.yesno() }} Orders are no cancellation. 
+            Payments can be made in advance. In failure to pay at delivery time
+            will result to <b>angry mama</b>. Click to proceed.</p>
+        <br />
+        {{ form.submit() }}
+    </form>
+{% endblock %}
+
+{% block main_content %}
+{% endblock %}

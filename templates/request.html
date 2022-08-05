@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+<main>
+    {% block aside %}
+    <aside>
+        <form action="" method="POST" novalidate>
+
+            {{ form.hidden_tag() }}
+            {{ form.food.label }}
+            {{ form.food() }}
+            {% for error in form.food.errors %}
+                {{ error }}
+            {% endfor %}
+            <br />
+            {{ form.submit }}
+        </form>
+
+    </aside>
+
+    {% endblock %}
+
+    {% block main_content %}
+    <section>
+        {% if req %}
+            <table>
+                <caption>Requests Made</caption>
+                <tr>
+                    <th scope="col">Food</th>
+                    <th scope="col">Status</th>
+                    <th scope="col"></th>
+                </tr>
+                {% for request in req %}
+                <tr>
+                    <td>{{ request['food'] }}</td>
+                    <td>{{ request['status'] }}</td>
+
+                    <td><a href="{{ url_for('remove_request', Id=request['id'] )}}"><img src="{{ url_for('static', filename='trash.png')}}"/></a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+    </section>
+
+</main>
+
+
+
+{% endblock %}
